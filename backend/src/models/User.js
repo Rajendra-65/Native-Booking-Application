@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema ({
     profileImage : {
         type : String,
     }
+},{
+    timestamps: true
 })
 
 userSchema.pre("save",async function(next){
