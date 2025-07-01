@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema ({
     }
 })
 
-userSchema.pre("save",function(next){
-    const salt =  bcrypt.hash(10);
-    this.password = bcrypt.hash(this.password,salt);
-
+userSchema.pre("save",async function(next){
+    const salt =  10;
+    const hashed = await bcrypt.hash(this.password,salt);
+    this.password = hashed
     next()
 })
 
@@ -34,6 +34,10 @@ userSchema.pre("save",function(next){
     }
     next()
 })
+
+userSchema.methods.comparePassword = async function (userPassword) {
+    return await bcrypt.compare(userPassword,this.password)
+}
 
 const User = mongoose.model("user",userSchema)
 
