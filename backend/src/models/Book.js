@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const bookSchema = new mongoose.Schema({
     title : {
-        title : String,
-        required : true,
+        type : String,
+        required : true
     },
     caption : {
         type : String,
