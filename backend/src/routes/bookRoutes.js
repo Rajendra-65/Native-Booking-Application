@@ -3,7 +3,7 @@ import cloudinary from "../lib/cloudinary";
 import Book from "../models/Book";
 const router = express.Router();
 
-router.post("/",async(req,res)=>{
+router.post("/",protectedRoute,async(req,res)=>{
     try{
         const { title , caption , rating , image } = req.body;
 
@@ -30,7 +30,7 @@ router.post("/",async(req,res)=>{
         res.status(201).json(newBook)
 
     }catch(e){
-        console.log("error in the post route",e)
+        console.log("error in the creating book",e)
         res.status(500).json({
             message:e
         })
