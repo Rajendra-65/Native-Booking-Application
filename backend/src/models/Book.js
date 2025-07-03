@@ -14,7 +14,7 @@ const bookSchema = new mongoose.Schema({
         required : true
     },
     rating : {
-        type : mongoose.Schema.Types.ObjectId,
+        type : Number,
         required : true,
         min : 1,
         max : 5
