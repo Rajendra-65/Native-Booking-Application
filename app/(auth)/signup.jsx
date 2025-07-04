@@ -6,12 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  Alert
 } from "react-native";
 import styles from "../../assets/styles/login.styles";
 import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constatnts/colors";
 import { useState } from "react";
-import { useRouter,Link } from "expo-router";
+import { useRouter } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
 
 const Signup = () => {
@@ -19,15 +20,19 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowpassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const {user,sayHello} = useAuthStore();
+  // const [isLoading, setIsLoading] = useState(false);
+  const {user , isLoading, register} = useAuthStore();
 
   console.log("user is Here: ",user)
 
   const router = useRouter();
 
-  const handleSignUp = () => {
-    sayHello()
+  const handleSignUp = async () => {
+    const result = await register(username,email,password);
+    if(!result.success) Alert.alert("Error",result.error)
+    setUserName('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -58,7 +63,7 @@ const Signup = () => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Jogn Doe"
+                  placeholder="JohnDoe"
                   placeholderTextColor={COLORS.placeholderText}
                   value={username}
                   onChangeText={setUserName}
@@ -125,7 +130,7 @@ const Signup = () => {
               {isLoading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Signup</Text>
               )}
             </TouchableOpacity>
             {/* Footer */}
