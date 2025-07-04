@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constatnts/colors";
 import { useState } from "react";
 import { useRouter,Link } from "expo-router";
+import { useAuthStore } from "../../store/authStore";
 
 const Signup = () => {
   const [username, setUserName] = useState("");
@@ -19,9 +20,15 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowpassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const {user,sayHello} = useAuthStore();
+
+  console.log("user is Here: ",user)
+
   const router = useRouter();
 
-  const handleSignUp = () => {};
+  const handleSignUp = () => {
+    sayHello()
+  };
 
   return (
     <KeyboardAvoidingView

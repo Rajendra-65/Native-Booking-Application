@@ -20,7 +20,12 @@ const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    fetch("http://localhost:3000/api/auth/login",{
+
+    })
+    
+  };
 
   return (
     <KeyboardAvoidingView
