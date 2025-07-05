@@ -7,23 +7,25 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import styles from "../../assets/styles/login.styles";
 import { useState } from "react";
 import COLORS from "../../constatnts/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import {useAuthStore} from "../../store/authStore.js"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowpassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    fetch("http://localhost:3000/api/auth/login",{
+  const {user, isLoading , login} = useAuthStore();
 
-    })
+  const handleLogin = async () => {
+    const result = await login(email,password)
+    if(!result.success) Alert.alert("Error",result.error)
     
   };
 

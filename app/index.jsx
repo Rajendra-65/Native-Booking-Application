@@ -1,7 +1,18 @@
-import { StyleSheet,Text, View } from "react-native";
+import { StyleSheet,Text, TouchableOpacity, View } from "react-native";
 import { Link } from "expo-router";
+import { useAuthStore } from "../store/authStore";
+import { useEffect } from "react";
 
 export default function Index() {
+
+  const { user , token, checkAuth,logout} = useAuthStore();
+
+  console.log(user,token)
+
+  useEffect(()=>{
+    checkAuth()
+  },[])
+
   return (
     <View
       style={styles.container}
@@ -9,8 +20,16 @@ export default function Index() {
       <Text
         style = {styles.title}
       >
-        Hello
+        Hello {user?.username}
       </Text>
+      <Text
+        style = {styles.title}
+      >
+        token {token}
+      </Text>
+      <TouchableOpacity onPress = {logout}>
+        <Text>LogOut</Text>
+      </TouchableOpacity>
       <Link href = "(auth)/signup">SignUp</Link>
       <Link href = "(auth)">Login</Link>
     </View>
