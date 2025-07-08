@@ -65,6 +65,7 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true });
 
     try {
+      console.log("code reached above response")
       const response = await fetch("https://mern-book-app-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
@@ -75,21 +76,26 @@ export const useAuthStore = create((set) => ({
           password
         })
       })
+      console.log("code below response")
 
       const data = await response.json();
 
-      console.log(data)
+      console.log("below response")
+
+      console.log("Login Data",data)
 
       if (data?.user) {
         await AsyncStorage.setItem("user", JSON.stringify(data.user));
       } else {
         console.warn("user data missing from response");
+        set({ isLoading: false });
       }
 
       if (data?.token) {
         await AsyncStorage.setItem("token", data.token);
       } else {
         console.warn("token missing from response");
+        set({ isLoading: false });
       }
 
       return { success: true }
