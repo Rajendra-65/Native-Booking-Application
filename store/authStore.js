@@ -1,5 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from 'zustand';
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -76,16 +76,12 @@ export const useAuthStore = create((set) => ({
           password
         })
       })
-      console.log("code below response")
 
       const data = await response.json();
 
-      console.log("below response")
-
-      console.log("Login Data",data)
-
       if (data?.user) {
         await AsyncStorage.setItem("user", JSON.stringify(data.user));
+        set({isLoading:false})
       } else {
         console.warn("user data missing from response");
         set({ isLoading: false });

@@ -1,20 +1,20 @@
+import { Ionicons } from "@expo/vector-icons";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  View,
+  ActivityIndicator,
+  Alert,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
+  View,
 } from "react-native";
 import styles from "../../assets/styles/login.styles";
-import { useState } from "react";
 import COLORS from "../../constatnts/colors";
-import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import {useAuthStore} from "../../store/authStore.js"
+import { useAuthStore } from "../../store/authStore.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,12 +22,17 @@ const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
 
   const {user, isLoading , login} = useAuthStore();
+  const router = useRouter();
 
   const handleLogin = async () => {
     const result = await login(email,password)
     setEmail('');
     setPassword('');
     if(!result.success) Alert.alert("Error",result.error)
+    
+    if(result.success){
+      router.push('/create')
+    }
     
   };
 
