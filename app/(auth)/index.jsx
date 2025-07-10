@@ -21,7 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowpassword] = useState(false);
 
-  const {user, isLoading , login} = useAuthStore();
+  const { isLoading , login} = useAuthStore();
   const router = useRouter();
 
   const handleLogin = async () => {
