@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import Loader from "../../components/Loader.jsx";
 import { formatPublishDate } from "../../lib/utils.js";
 
 export default function Home() {
@@ -114,6 +115,10 @@ export default function Home() {
   useEffect(() => {
     fetchBooks();
   }, []);
+
+  if(loading) {
+    return <Loader/>
+  }
 
   return (
     <View style={styles.container}>
