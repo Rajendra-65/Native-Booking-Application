@@ -89,6 +89,7 @@ export const useAuthStore = create((set) => ({
 
       if (data?.token) {
         await AsyncStorage.setItem("token", data.token);
+        set({token:data.token})
       } else {
         console.warn("token missing from response");
         set({ isLoading: false });
