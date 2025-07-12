@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import {useSafeAreaInsets} from "react-native-safe-area-context"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import COLORS from '../constatnts/colors'
 
@@ -15,6 +15,7 @@ const SafeScreen = ({children}) => {
     </View>
   )
 }
+
 
 export default SafeScreen;
 
